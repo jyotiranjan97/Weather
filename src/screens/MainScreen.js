@@ -1,13 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import { useDispatch } from 'react-redux';
 
 import globalStyles from '../styles/globalstyles';
-import api from '../api/openWeatherApi';
-import { APP_ID } from '../assets/locationConfig';
 import Location from '../components/Location/Location';
+import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
+import { fetchWeatherData } from '../store/actions/weatherAction';
+import ForecastList from '../components/Forecast/ForecastList';
 
 const MainScreen = () => {
+  const dispatch = useDispatch();
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -16,9 +19,9 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (location) {
-      fetchWeatherData();
+      dispatch(fetchWeatherData(location)); // fetching current weather data
     }
-  }, [location, fetchWeatherData]);
+  }, [dispatch, location]);
 
   // Getting Current Location
   const fetchLocation = () => {
@@ -41,31 +44,13 @@ const MainScreen = () => {
     );
   };
 
-  const fetchWeatherData = useCallback(() => {
-    api
-      .any({
-        method: 'GET',
-        url: '/data/2.5/onecall',
-        params: {
-          lat: location.lati,
-          lon: location.longi,
-          exclude: 'hourly,minutely',
-          appid: APP_ID,
-        },
-      })
-      .then(response => {
-        console.log('WeatherData -------\n', response.data);
-      });
-  }, [location]);
-
   return (
     <View style={globalStyles.container}>
-      <Text>Main</Text>
       {location && (
         <>
-          <Text>Lati: {location.lati}</Text>
-          <Text>Longi: {location.longi}</Text>
+          <CurrentWeather />
           <Location location={location} />
+          <ForecastList />
         </>
       )}
     </View>

@@ -3,14 +3,19 @@ import {
   convertWindDirection,
   updateObject,
 } from '../../utility/convertUtility';
-import { SET_DATA, SET_ERROR, SET_LOADING } from '../actions/actionTypes';
+import {
+  SET_CITY,
+  SET_DATA,
+  SET_ERROR,
+  SET_LOADING,
+} from '../actions/actionTypes';
 
 const initialState = {
   currentTemp: '',
   feelsLikeTemp: '',
   windSpeed: '',
   windDirection: '',
-  forecastDaily: null,
+  forecastDaily: [],
   cityName: '',
   isError: false,
   isLoading: true,
@@ -22,7 +27,16 @@ const setData = data => {
   updatedData.feelsLikeTemp = convertTempToCelcius(data.feels_temp);
   updatedData.windSpeed = data.wind_speed;
   updatedData.windDirection = convertWindDirection(data.wind_deg);
-  updatedData.cityName = data.city;
+  updatedData.forecastDaily = data.daily;
+  updatedData.isLoading = data.isLoading;
+
+  console.log('Daily -->', updatedData.forecastDaily);
+  return updatedData;
+};
+
+const setCityName = city => {
+  const updatedData = initialState;
+  updatedData.cityName = city;
   return updatedData;
 };
 
@@ -42,6 +56,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_DATA:
       return updateObject(state, setData(action.payLoad));
+    case SET_CITY:
+      return updateObject(state, setCityName(action.payLoad));
     case SET_ERROR:
       return setError(action.payLoad);
     case SET_LOADING:

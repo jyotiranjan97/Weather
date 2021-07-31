@@ -1,39 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import api from '../../api/openWeatherApi';
-import { APP_ID } from '../../assets/locationConfig';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchCityName } from '../../store/actions/weatherAction';
 
 const Location = ({ location }) => {
-  const [cityName, setCityName] = useState('');
+  const dispatch = useDispatch();
+  const city = useSelector(state => state.weather.cityName);
 
   useEffect(() => {
-    fetchCityName();
-  }, [fetchCityName]);
-
-  // Fetching City Name based on Location
-  const fetchCityName = useCallback(() => {
-    api
-      .any({
-        method: 'GET',
-        url: '/geo/1.0/reverse',
-        params: {
-          lat: location.lati,
-          lon: location.longi,
-          limit: 1,
-          appid: APP_ID,
-        },
-      })
-      .then(response => {
-        setCityName(
-          response.data[0].local_names.ascii + ', ' + response.data[0].country,
-        );
-        console.log('City -------\n', response.data);
-      });
-  }, [location]);
+    console.log(typeof fetchCityName);
+    dispatch(fetchCityName(location));
+  }, [dispatch, location]);
 
   return (
     <View>
-      <Text>City: {cityName}</Text>
+      <Text>City: {city}</Text>
     </View>
   );
 };

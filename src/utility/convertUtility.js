@@ -1,6 +1,6 @@
 /* eslint-disable curly */
-export const convertTempToCelcius = farenheitTemp => {
-  return (farenheitTemp - 32) / 1.8;
+export const convertTempToCelcius = kelvinTemp => {
+  return Math.floor(kelvinTemp - 273.15);
 };
 
 export const convertWindDirection = deg => {

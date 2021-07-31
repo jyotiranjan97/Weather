@@ -3,8 +3,9 @@ import { Text, View } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 
 import globalStyles from '../styles/globalstyles';
-import api from '../api/fetchWeatherData';
+import api from '../api/openWeatherApi';
 import { APP_ID } from '../assets/locationConfig';
+import Location from '../components/Location/Location';
 
 const MainScreen = () => {
   const [location, setLocation] = useState(null);
@@ -64,6 +65,7 @@ const MainScreen = () => {
         <>
           <Text>Lati: {location.lati}</Text>
           <Text>Longi: {location.longi}</Text>
+          <Location location={location} />
         </>
       )}
     </View>

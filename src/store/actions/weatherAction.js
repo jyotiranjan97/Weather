@@ -1,5 +1,5 @@
 import api from '../../api/openWeatherApi';
-import { APP_ID } from '../../assets/locationConfig';
+import { APP_ID } from '../../configs/locationConfig';
 import { SET_CITY, SET_DATA, SET_ERROR, SET_LOADING } from './actionTypes';
 
 export const setData = data => ({
@@ -44,6 +44,7 @@ export const fetchWeatherData = location => {
         currentData.wind_deg = response.data.current.wind_deg;
         currentData.daily = response.data.daily;
         currentData.isLoading = false;
+        currentData.isError = false;
         dispatch(setData(currentData));
       })
       .catch(error => {

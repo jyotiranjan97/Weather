@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import globalStyles from '../styles/globalstyles';
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
-import { fetchWeatherData } from '../store/actions/weatherAction';
+import { fetchWeatherData, setLoading } from '../store/actions/weatherAction';
 import ForecastList from '../components/Forecast/ForecastList';
+import Loader from '../components/UI/Loader';
+import Error from '../components/Error/Error';
 
 const MainScreen = () => {
   const dispatch = useDispatch();
   const [location, setLocation] = useState(null);
+  const { isLoading, isError } = useSelector(state => state.weather);
 
   useEffect(() => {
     fetchLocation();
-  }, []);
+  }, [fetchLocation]);
 
   useEffect(() => {
     if (location) {
@@ -23,7 +26,8 @@ const MainScreen = () => {
   }, [dispatch, location]);
 
   // Getting Current Location
-  const fetchLocation = () => {
+  const fetchLocation = useCallback(() => {
+    dispatch(setLoading(true));
     Geolocation.getCurrentPosition(
       info => {
         console.log('getCurrentPosition', info);
@@ -41,17 +45,25 @@ const MainScreen = () => {
         maximumAge: 3600000,
       },
     );
-  };
+  }, [dispatch]);
 
   return (
-    <View style={globalStyles.container}>
-      {location && (
-        <>
-          <CurrentWeather location={location} />
-          <ForecastList />
-        </>
+    <>
+      {isError ? (
+        <Error location={location} />
+      ) : (
+        <View style={globalStyles.container}>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <CurrentWeather location={location} />
+              <ForecastList />
+            </>
+          )}
+        </View>
       )}
-    </View>
+    </>
   );
 };
 

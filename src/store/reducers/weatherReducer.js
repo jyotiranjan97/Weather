@@ -29,8 +29,8 @@ const setData = data => {
   updatedData.windDirection = convertWindDirection(data.wind_deg);
   updatedData.forecastDaily = data.daily;
   updatedData.isLoading = data.isLoading;
+  updatedData.isError = data.isError;
 
-  console.log('Daily -->', updatedData.forecastDaily);
   return updatedData;
 };
 

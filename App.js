@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import MainScreen from './src/screens/MainScreen';
-import { config } from './src/assets/locationConfig';
+import { config } from './src/configs/locationConfig';
 import weatherReducer from './src/store/reducers/weatherReducer';
 
 // Initialized Location Configuration
@@ -44,8 +44,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        <StatusBar barStyle="dark-content" backgroundColor="white" />
         <MainScreen />
+        <StatusBar barStyle="dark-content" backgroundColor="white" />
       </SafeAreaProvider>
     </Provider>
   );

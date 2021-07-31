@@ -23,7 +23,7 @@ const CurrentWeather = ({ location }) => {
         <View style={styles.windContainer}>
           <Text style={styles.headerText}>Wind Speed</Text>
           <Text style={styles.valuesText}>
-            {windSpeed}km/hr {windDirection}
+            {windSpeed} {windDirection}
           </Text>
         </View>
       </View>

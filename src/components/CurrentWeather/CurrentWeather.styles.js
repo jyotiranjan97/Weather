@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 15,
+    color: 'grey',
   },
   valuesText: {
     fontSize: 22,

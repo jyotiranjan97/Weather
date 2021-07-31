@@ -43,6 +43,7 @@ const setCityName = city => {
 const setError = isError => {
   const updatedData = initialState;
   updatedData.isError = isError;
+  updatedData.isLoading = false;
   return updatedData;
 };
 

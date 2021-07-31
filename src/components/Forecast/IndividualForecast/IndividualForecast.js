@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { convertTempToCelcius } from '../../../utility/convertUtility';
+import styles from './IndividualForecast.styles';
 
 const IndividualForecast = ({ item }) => {
   const days = [
@@ -19,10 +20,10 @@ const IndividualForecast = ({ item }) => {
   const temp = convertTempToCelcius(item.temp.day);
 
   return (
-    <>
-      <Text>{dayName}</Text>
-      <Text>{temp}</Text>
-    </>
+    <View style={styles.itemContainer}>
+      <Text style={styles.text}>{dayName}</Text>
+      <Text style={styles.text}>{temp}</Text>
+    </View>
   );
 };
 

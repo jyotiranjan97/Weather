@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-const { View, Text } = require('react-native');
+import { View, Text } from 'react-native';
 
-const CurrentWeather = () => {
+import Location from '../Location/Location';
+
+const CurrentWeather = ({ location }) => {
   const { currentTemp, feelsLikeTemp, windSpeed, windDirection } = useSelector(
     state => state.weather,
   );
@@ -17,6 +19,7 @@ const CurrentWeather = () => {
         <Text>
           Wind Speed {windSpeed}km/hr {windDirection}
         </Text>
+        <Location location={location} />
       </View>
     </View>
   );

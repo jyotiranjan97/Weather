@@ -4,7 +4,6 @@ import Geolocation from '@react-native-community/geolocation';
 import { useDispatch } from 'react-redux';
 
 import globalStyles from '../styles/globalstyles';
-import Location from '../components/Location/Location';
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
 import { fetchWeatherData } from '../store/actions/weatherAction';
 import ForecastList from '../components/Forecast/ForecastList';
@@ -48,8 +47,7 @@ const MainScreen = () => {
     <View style={globalStyles.container}>
       {location && (
         <>
-          <CurrentWeather />
-          <Location location={location} />
+          <CurrentWeather location={location} />
           <ForecastList />
         </>
       )}

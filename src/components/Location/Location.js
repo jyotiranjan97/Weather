@@ -3,19 +3,19 @@ import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchCityName } from '../../store/actions/weatherAction';
+import styles from './Location.style';
 
 const Location = ({ location }) => {
   const dispatch = useDispatch();
   const city = useSelector(state => state.weather.cityName);
 
   useEffect(() => {
-    console.log(typeof fetchCityName);
     dispatch(fetchCityName(location));
   }, [dispatch, location]);
 
   return (
-    <View>
-      <Text>City: {city}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>{city}</Text>
     </View>
   );
 };

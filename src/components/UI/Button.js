@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import ScalableText from 'react-native-text';
 
 import { WIDTH } from '../../utility/layout';
 
@@ -7,7 +8,7 @@ const Button = ({ buttonTitle, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.buttonContainer}>
-        <Text style={styles.text}>{buttonTitle}</Text>
+        <ScalableText style={styles.text}>{buttonTitle}</ScalableText>
       </View>
     </TouchableOpacity>
   );

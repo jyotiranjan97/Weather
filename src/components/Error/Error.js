@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import ScalableText from 'react-native-text';
 
 import { fetchWeatherData } from '../../store/actions/weatherAction';
 import Button from '../UI/Button';
@@ -17,7 +18,9 @@ const Error = ({ location }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Something Went Wrong at our End</Text>
+      <ScalableText style={styles.text}>
+        Something Went Wrong at our End
+      </ScalableText>
       <Button buttonTitle="Retry" onPress={onRetryButtonPress} />
     </View>
   );

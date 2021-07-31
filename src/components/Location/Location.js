@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import ScalableText from 'react-native-text';
 
 import { fetchCityName } from '../../store/actions/weatherAction';
 import styles from './Location.style';
@@ -15,7 +16,7 @@ const Location = ({ location }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{city}</Text>
+      <ScalableText style={styles.text}>{city}</ScalableText>
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import ScalableText from 'react-native-text';
 
 import Location from '../Location/Location';
 import styles from './CurrentWeather.styles';
@@ -13,18 +14,22 @@ const CurrentWeather = ({ location }) => {
   return (
     <View style={styles.container}>
       <View style={styles.tempContainer}>
-        <Text style={styles.tempText}>{currentTemp} &deg;C</Text>
+        <ScalableText style={styles.tempText}>
+          {currentTemp} &deg;C
+        </ScalableText>
       </View>
       <View style={styles.additionalContainer}>
         <View style={styles.feelsLikeContainer}>
-          <Text style={styles.headerText}>Feels Like</Text>
-          <Text style={styles.valuesText}>{feelsLikeTemp} &deg;C</Text>
+          <ScalableText style={styles.headerText}>Feels Like</ScalableText>
+          <ScalableText style={styles.valuesText}>
+            {feelsLikeTemp} &deg;C
+          </ScalableText>
         </View>
         <View style={styles.windContainer}>
-          <Text style={styles.headerText}>Wind Speed</Text>
-          <Text style={styles.valuesText}>
+          <ScalableText style={styles.headerText}>Wind Speed</ScalableText>
+          <ScalableText style={styles.valuesText}>
             {windSpeed} {windDirection}
-          </Text>
+          </ScalableText>
         </View>
       </View>
       <Location location={location} />

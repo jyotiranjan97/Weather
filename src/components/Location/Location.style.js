@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     marginVertical: '10%',
   },
   text: {
-    fontSize: 50,
+    fontSize: 40,
   },
 });
 

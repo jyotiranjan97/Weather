@@ -30,14 +30,13 @@ const MainScreen = () => {
     dispatch(setLoading(true));
     Geolocation.getCurrentPosition(
       info => {
-        console.log('getCurrentPosition', info);
         setLocation({
           lati: info.coords.latitude,
           longi: info.coords.longitude,
         });
       },
       err => {
-        console.log('getCurrentPosition.error', err);
+        console.err('getCurrentPosition.error', err);
       },
       {
         enableHighAccuracy: false,

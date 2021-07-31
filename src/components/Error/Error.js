@@ -13,7 +13,6 @@ const Error = ({ location }) => {
 
   const onRetryButtonPress = () => {
     dispatch(fetchWeatherData(location));
-    console.log('clicked');
   };
 
   return (

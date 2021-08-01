@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginHorizontal: '5%',
-    fontSize: 70,
+    fontSize: 50,
     letterSpacing: 0.5,
   },
 });

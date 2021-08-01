@@ -8,7 +8,7 @@ import styles from './Location.style';
 
 const Location = () => {
   const dispatch = useDispatch();
-  const { city, location } = useSelector(state => state.weather);
+  const { cityName, location } = useSelector(state => state.weather);
 
   useEffect(() => {
     dispatch(fetchCityName(location));
@@ -16,7 +16,7 @@ const Location = () => {
 
   return (
     <View style={styles.container}>
-      <ScalableText style={styles.text}>{city}</ScalableText>
+      <ScalableText style={styles.text}>{cityName}</ScalableText>
     </View>
   );
 };

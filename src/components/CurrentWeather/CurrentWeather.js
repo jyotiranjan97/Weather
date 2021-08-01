@@ -13,11 +13,13 @@ const CurrentWeather = ({ location }) => {
 
   return (
     <View style={styles.container}>
+      {/* Current Temperature */}
       <View style={styles.tempContainer}>
         <ScalableText style={styles.tempText}>
           {currentTemp} &deg;C
         </ScalableText>
       </View>
+      {/* Wind Speed and Feels Like Temp */}
       <View style={styles.additionalContainer}>
         <View style={styles.feelsLikeContainer}>
           <ScalableText style={styles.headerText}>Feels Like</ScalableText>
@@ -32,6 +34,7 @@ const CurrentWeather = ({ location }) => {
           </ScalableText>
         </View>
       </View>
+      {/* City Name */}
       <Location location={location} />
     </View>
   );

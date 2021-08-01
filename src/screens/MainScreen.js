@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import globalStyles from '../styles/globalstyles';
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
-import { fetchWeatherData, setLoading } from '../store/actions/weatherAction';
+import {
+  fetchWeatherData,
+  setError,
+  setLoading,
+} from '../store/actions/weatherAction';
 import ForecastList from '../components/Forecast/ForecastList';
 import Loader from '../components/UI/Loader';
 import Error from '../components/Error/Error';
@@ -36,7 +40,8 @@ const MainScreen = () => {
         });
       },
       err => {
-        console.err('getCurrentPosition.error', err);
+        console.log('getCurrentPosition.error', err);
+        dispatch(setError(true));
       },
       {
         enableHighAccuracy: false,

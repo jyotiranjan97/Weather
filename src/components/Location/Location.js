@@ -6,9 +6,9 @@ import ScalableText from 'react-native-text';
 import { fetchCityName } from '../../store/actions/weatherAction';
 import styles from './Location.style';
 
-const Location = ({ location }) => {
+const Location = () => {
   const dispatch = useDispatch();
-  const city = useSelector(state => state.weather.cityName);
+  const { city, location } = useSelector(state => state.weather);
 
   useEffect(() => {
     dispatch(fetchCityName(location));

@@ -1,6 +1,18 @@
+import Geolocation from '@react-native-community/geolocation';
 import api from '../../api/openWeatherApi';
 import { APP_ID } from '../../configs/locationConfig';
-import { SET_CITY, SET_DATA, SET_ERROR, SET_LOADING } from './actionTypes';
+import {
+  SET_CITY,
+  SET_DATA,
+  SET_ERROR,
+  SET_LOADING,
+  SET_LOCATION,
+} from './actionTypes';
+
+export const setLocation = location => ({
+  type: SET_LOCATION,
+  payLoad: location,
+});
 
 export const setData = data => ({
   type: SET_DATA,
@@ -87,5 +99,28 @@ export const fetchCityName = location => {
     } else {
       dispatch(setError(true));
     }
+  };
+};
+
+export const fetchLocation = () => {
+  return dispatch => {
+    dispatch(setLoading(true));
+    Geolocation.getCurrentPosition(
+      info => {
+        const location = {};
+        location.lati = info.coords.latitude;
+        location.longi = info.coords.longitude;
+        dispatch(setLocation(location));
+      },
+      err => {
+        console.log('getCurrentPosition.error', err);
+        dispatch(setError(true));
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 20000,
+        maximumAge: 3600000,
+      },
+    );
   };
 };

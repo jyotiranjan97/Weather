@@ -1,14 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import Geolocation from '@react-native-community/geolocation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import globalStyles from '../styles/globalstyles';
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
 import {
+  fetchLocation,
   fetchWeatherData,
-  setError,
-  setLoading,
 } from '../store/actions/weatherAction';
 import ForecastList from '../components/Forecast/ForecastList';
 import Loader from '../components/UI/Loader';
@@ -16,40 +14,18 @@ import Error from '../components/Error/Error';
 
 const MainScreen = () => {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState(null);
-  const { isLoading, isError } = useSelector(state => state.weather);
+
+  const { location, isLoading, isError } = useSelector(state => state.weather);
 
   useEffect(() => {
-    fetchLocation();
-  }, [fetchLocation]);
+    dispatch(fetchLocation()); // Getting location
+  }, [dispatch]);
 
   useEffect(() => {
     if (location) {
       dispatch(fetchWeatherData(location)); // fetching current weather data
     }
   }, [dispatch, location]);
-
-  // Getting Current Location
-  const fetchLocation = useCallback(() => {
-    dispatch(setLoading(true));
-    Geolocation.getCurrentPosition(
-      info => {
-        setLocation({
-          lati: info.coords.latitude,
-          longi: info.coords.longitude,
-        });
-      },
-      err => {
-        console.log('getCurrentPosition.error', err);
-        dispatch(setError(true));
-      },
-      {
-        enableHighAccuracy: false,
-        timeout: 20000,
-        maximumAge: 3600000,
-      },
-    );
-  }, [dispatch]);
 
   return (
     <>
@@ -61,7 +37,7 @@ const MainScreen = () => {
             <Loader />
           ) : (
             <>
-              <CurrentWeather location={location} />
+              <CurrentWeather />
               <ForecastList />
             </>
           )}

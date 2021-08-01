@@ -6,7 +6,7 @@ import ScalableText from 'react-native-text';
 import Location from '../Location/Location';
 import styles from './CurrentWeather.styles';
 
-const CurrentWeather = ({ location }) => {
+const CurrentWeather = () => {
   const { currentTemp, feelsLikeTemp, windSpeed, windDirection } = useSelector(
     state => state.weather,
   );
@@ -35,7 +35,7 @@ const CurrentWeather = ({ location }) => {
         </View>
       </View>
       {/* City Name */}
-      <Location location={location} />
+      <Location />
     </View>
   );
 };

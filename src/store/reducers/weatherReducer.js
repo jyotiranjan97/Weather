@@ -8,9 +8,11 @@ import {
   SET_DATA,
   SET_ERROR,
   SET_LOADING,
+  SET_LOCATION,
 } from '../actions/actionTypes';
 
 const initialState = {
+  location: null,
   currentTemp: '',
   feelsLikeTemp: '',
   windSpeed: '',
@@ -19,6 +21,12 @@ const initialState = {
   cityName: '',
   isError: false,
   isLoading: true,
+};
+
+const setLocation = location => {
+  const updatedData = initialState;
+  updatedData.location = location;
+  return updatedData;
 };
 
 const setData = data => {
@@ -54,6 +62,8 @@ const setLoading = isLoading => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_LOCATION:
+      return updateObject(state, setLocation(action.payLoad));
     case SET_DATA:
       return updateObject(state, setData(action.payLoad));
     case SET_CITY:
